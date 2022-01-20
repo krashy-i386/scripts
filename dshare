@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -F"file=@$(find $HOME -type f | dmenu -l 15)" 0x0.st | xclip -sel c
+notify-send "📋 Copied file link 📎"
