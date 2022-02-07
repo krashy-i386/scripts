@@ -25,6 +25,6 @@ ffmpeg \
 	-re -vsync -1 -i "$IN" $OPTS \
 	-vcodec $VC -preset $QUAL -pix_fmt yuv420p -vf scale=$RES -r $FPS -g $(($FPS * 2)) -b:v $VBR \
 	-acodec $AC -ar 44100	-b:a $ABR -bufsize 512K \
-	-f flv "$URL/$KEY"
+	-preset ultrafast -f flv "$URL/$KEY"
 
 notify-send "🎥 Live Stream Ended 🔴"
