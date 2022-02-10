@@ -1,0 +1,40 @@
+#!/bin/bash
+
+f=3 b=4
+for j in f b; do
+  for i in {0..7}; do
+    printf -v $j$i %b "\e[${!j}${i}m"
+  done
+done
+d=$'\e[1m'
+t=$'\e[0m'
+v=$'\e[7m'
+
+# Items
+sep="• • •"
+s=$d$f0$sep$t
+
+k="kernel"
+kernel="$(uname -r | cut -d '-' -f1)"
+
+sh="shell"
+shell=$(basename $SHELL)
+
+dt="date"
+date="$(date '+%a %e %b %H:%M:%S')"
+
+# (\ /)
+# ( · ·)
+# c(")(")
+
+# (\ /)
+# ( . .)
+# c(")(")
+
+cat << EOF
+
+(\ /)     $f2$sh $t$sep $shell
+( $d. .$t)    $f3$k $t$sep $kernel
+c(")(")   $f4$dt $t$sep $date
+
+EOF
