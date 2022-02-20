@@ -23,6 +23,8 @@ shell=$(basename $SHELL)
 dt="date"
 date="$(date '+%a %e %b %H:%M:%S')"
 
+user="$USER"
+
 # (\ /)
 # ( · ·)
 # c(")(")
@@ -32,9 +34,10 @@ date="$(date '+%a %e %b %H:%M:%S')"
 # c(")(")
 
 cat << EOF
-
-(\ /)     $f2$sh $t$sep $shell
-( $d. .$t)    $f3$k $t$sep $kernel
-c(")(")   $f4$dt $t$sep $date
+$f5         ------------ $user ------------
+$f6(\ /)    $sh $t$sep $shell
+$f5( $d. .$t$f5)   $k $t$sep $kernel$f6
+c(")(")  $dt $t$sep $date
+$f5         -------------------------------
 
 EOF
