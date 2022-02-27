@@ -10,34 +10,21 @@ d=$'\e[1m'
 t=$'\e[0m'
 v=$'\e[7m'
 
-# Items
-sep="• • •"
+sep="~"
 s=$d$f0$sep$t
 
-k="kernel"
 kernel="$(uname -r | cut -d '-' -f1)"
 
-sh="shell"
 shell=$(basename $SHELL)
 
-dt="date"
-date="$(date '+%a %e %b %H:%M:%S')"
-
-user="$USER"
-
 # (\ /)
-# ( · ·)
-# c(")(")
-
-# (\ /)
-# ( . .)
+# ( . .) ( · ·)
 # c(")(")
 
 cat << EOF
-$f5         ------------ $user ------------
-$f6(\ /)    $sh $t$sep $shell
-$f5( $d. .$t$f5)   $k $t$sep $kernel$f6
-c(")(")  $dt $t$sep $date
-$f5         -------------------------------
+
+(\ /)$f4    sh  $t$sep $shell
+( $d. .$t)$f4   kr  $t$sep $kernel
+c($f1"$t)($f1"$t)$f4  mem $t$sep $(free -h | grep Mem | awk '{print $3}') / $(free -h | grep Mem | awk '{print $2}')
 
 EOF
