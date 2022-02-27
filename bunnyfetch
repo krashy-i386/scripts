@@ -17,6 +17,9 @@ kernel="$(uname -r | cut -d '-' -f1)"
 
 shell=$(basename $SHELL)
 
+usedMem=$(free -h | grep Mem | awk '{print $3}')
+totalMem=$(free -h | grep Mem | awk '{print $2}')
+
 # (\ /)
 # ( . .) ( · ·)
 # c(")(")
@@ -25,6 +28,6 @@ cat << EOF
 
 (\ /)$f4    sh  $t$sep $shell
 ( $d. .$t)$f4   kr  $t$sep $kernel
-c($f1"$t)($f1"$t)$f4  mem $t$sep $(free -h | grep Mem | awk '{print $3}') / $(free -h | grep Mem | awk '{print $2}')
+c($f1"$t)($f1"$t)$f4  mem $t$sep $usedMem / $totalMem
 
 EOF
