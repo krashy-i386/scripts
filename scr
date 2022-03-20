@@ -1,0 +1,47 @@
+#!/bin/sh
+
+cr="\033[0;0m\033[1;31m"
+cg="\033[0;0m\033[1;32m"
+cb="\033[0;0m\033[1;34m"
+
+file=$2
+
+help() { printf "${cg}Screen shot/record
+Usage: scr ${cb}[s|r] output\n"; }
+
+shot() {
+	if ! type maim >/dev/null; then
+		printf "${cr}'maim' not found, Make sure you installed it.\n" && exit 1
+	fi
+	maim -usb 5 $file /dev/null || exit 1
+
+	if type notify-send >/dev/null; then
+		notify-send "Screenshot saved at $(pwd)/$file"
+	else
+		printf "${cg}Screenshot saved at $(pwd)/$file"
+	fi
+
+	if type xclip >/dev/null; then
+		xclip -sel c -t image/png $(pwd)/$file
+	fi
+}
+
+rec() {
+	printf "${cg}Do you want audio? ${cb}(y/n)${cg} "
+	read audio
+	if type ffmpeg >/dev/null; then
+		if [ $audio == 'y' ]; then
+			ffmpeg -f pulse -i default -framerate 60 -f x11grab -s 1920x1080 -i :0.0+1920,0 -pix_fmt yuv420p -c:v libx264 -preset ultrafast -y -v error -stats "$file"
+		else
+			ffmpeg -framerate 60 -f x11grab -s 1920x1080 -i :0.0+1920,0 -pix_fmt yuv420p -c:v libx264 -preset ultrafast -y -v error -stats "$file"
+		fi
+	else
+		printf "${cr}'ffmpeg' not installed, Make sure you installed it.\n"
+	fi
+}
+
+case $1 in
+	*s*) shot;;
+	*r*) rec;;
+	*) help;;
+esac
