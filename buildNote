@@ -1,0 +1,14 @@
+#!/bin/sh
+
+input=$1
+output="$(basename "$input" .md).pdf"
+
+echo $input
+echo $output
+
+pandoc \
+	--pdf-engine=xelatex \
+  -V mainfont:'Noto Serif' \
+  -V geometry:"margin=5em" \
+  $input \
+  -o $output
