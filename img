@@ -10,7 +10,7 @@ if ! type convert >/dev/null; then
 fi
 
 help() {
-	printf "${cg}Usage: img ${cb}hex output\n" && exit;
+	printf "${cg}Usage: img ${cb}hex\n" && exit;
 }
 
 main() {
