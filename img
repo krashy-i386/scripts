@@ -1,0 +1,25 @@
+#!/bin/sh
+
+cr="\033[0;0m\033[1;31m"
+cg="\033[0;0m\033[1;32m"
+cb="\033[0;0m\033[1;34m"
+size="1920x1080"
+
+if ! type convert >/dev/null; then
+	print "${cr}Error: Can't find 'convert', make sure you have installed ImageMagick.\n" && exit 1;
+fi
+
+help() {
+	printf "${cg}Usage: img ${cb}hex output\n" && exit;
+}
+
+main() {
+	convert -size $size xc:$color $(echo $color | sed 's/^.//;s/$/.png/')
+}
+
+case $1 in
+	\#*) color=$1;;
+	*) help;;
+esac
+
+main
