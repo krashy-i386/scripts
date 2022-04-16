@@ -1,3 +1,2 @@
 # scripts
-
-Random Scripts
+Collection of my bash scriptss
