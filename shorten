@@ -1,0 +1,4 @@
+#!/bin/sh
+url=$1
+curl "https://is.gd/create.php?format=simple&url=$url" | xclip -sel c
+echo "Copied link"

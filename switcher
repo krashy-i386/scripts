@@ -1,0 +1,9 @@
+#!/bin/sh
+
+current="$(setxkbmap -print -verbose 10 | grep layout: | sed 's/^.* * //')"
+
+if [ "$current" = "dvorak" ]; then
+	setxkbmap it
+else
+	setxkbmap dvorak
+fi
